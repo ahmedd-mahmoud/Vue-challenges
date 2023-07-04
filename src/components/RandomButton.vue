@@ -17,8 +17,8 @@ const handleButtonClick = () => {
   } else if (buttonStatus.value === "playing") {
     props.score.value += 1;
     // container width= 1000px, height= 400px, button width = 30px , height = 15 px
-    props.position.value.left = Math.random() * 1000 + 0.5 * 30 + "px";
-    props.position.value.top = Math.random() * 400 + 0.5 * 15 + "px";
+    props.position.left = Math.random() * 1000 + 0.5 * 30 + "px";
+    props.position.top = Math.random() * 400 + 0.5 * 15 + "px";
     if (props.score.value > 4) {
       props.isEnded.value = true;
       buttonStatus.value = "initial";
@@ -28,8 +28,8 @@ const handleButtonClick = () => {
 
 const buttonStyle = computed(() => {
   return {
-    top: props.position.value.top,
-    left: props.position.value.left,
+    top: props.position.top,
+    left: props.position.left,
   };
 });
 </script>

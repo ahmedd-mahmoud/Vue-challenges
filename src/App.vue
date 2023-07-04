@@ -10,7 +10,7 @@ const position = ref({ top: "50%", left: "50%" });
 const states = {
   score,
   isEnded,
-  position,
+  position: position.value,
 };
 
 const handleRestart = () => {
