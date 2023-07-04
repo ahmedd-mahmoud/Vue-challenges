@@ -1,98 +1,102 @@
 <script setup>
 import { ref } from "vue";
+import Box from "./components/Box.vue";
 
-const user = ref({ username: "", password: "" });
-const isActive = ref(true);
-const statusText = ref("");
+const score = ref(0);
+// const timer = ref(10);
+const isEnded = ref(false);
+const position = ref({ top: "50%", left: "50%" });
 
-const handleSubmit = () => {
-  console.log(user.value);
-  statusText.value = user.value.password === "1234" ? "Thank You!" : "Fail :(";
-  isActive.value = false;
+const states = {
+  score,
+  isEnded,
+  position,
+};
+
+const handleRestart = () => {
+  position.value.left = "50%";
+  position.value.top = "50%";
+  score.value = 0;
+  isEnded.value = false;
+  // setTimer(10);
 };
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit" v-if="isActive">
-    <label>Username</label>
-    <input v-model="user.username" />
-    <label>Password</label>
-    <input v-model="user.password" type="password" />
-    <button>OK</button>
-  </form>
-  <p v-else>{{ statusText }}</p>
+  <div class="title-div">
+    <h1 class="title">Catch me if you can:</h1>
+  </div>
+  <div>
+    <!-- <p class="timer">Timer: 00:{{ timer }}</p> -->
+    <p class="score-text">Score: {{ score }}</p>
+  </div>
+  <Box v-bind="states" v-if="!isEnded" />
+  <div v-else class="result">
+    <h1 class="result-text">Thanks for playing!</h1>
+    <div class="result-buttons">
+      <button class="restart-button" @click="handleRestart">Try again</button>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-form {
-  width: 400px;
-  height: 400px;
-  background-color: #adadad;
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  background-color: rgb(231, 255, 252);
+}
+
+.title-div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 63%;
+}
+
+.title {
+  font-size: 30px;
+  margin-left: 50px;
+  color: darkblue;
+}
+
+.result {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.result-text {
+  font-size: 64px;
+  color: red;
+}
+
+.result-buttons {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 15px;
 }
-label {
-  padding-right: 32%;
-  margin-bottom: 5px;
-}
-input {
-  margin-bottom: 20px;
-  width: 200px;
-  height: 20px;
-  border-radius: 5px;
-}
-p {
-  font-size: xx-large;
-}
-</style>
-<script setup>
-import { ref } from "vue";
 
-const user = ref({ username: "", password: "" });
-const isActive = ref(true);
-const statusText = ref("");
-
-const handleSubmit = () => {
-  console.log(user.value);
-  statusText.value = user.value.password === "1234" ? "Thank You!" : "Fail :(";
-  isActive.value = false;
-};
-</script>
-
-<template>
-  <form @submit.prevent="handleSubmit" v-if="isActive">
-    <label>Username</label>
-    <input v-model="user.username" />
-    <label>Password</label>
-    <input v-model="user.password" type="password" />
-    <button>OK</button>
-  </form>
-  <p v-else>{{ statusText }}</p>
-</template>
-
-<style scoped>
-form {
-  width: 400px;
-  height: 400px;
-  background-color: #adadad;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.restart-button {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 12px;
+  background-color: rgb(20, 173, 20);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
-label {
-  padding-right: 32%;
-  margin-bottom: 5px;
+.restart-button:hover {
+  background-color: rgb(14, 128, 14);
 }
-input {
-  margin-bottom: 20px;
-  width: 200px;
-  height: 20px;
-  border-radius: 5px;
-}
-p {
-  font-size: xx-large;
+
+.score-text {
+  text-align: center;
+  font-size: 32px;
+  margin-top: 5px;
 }
 </style>
