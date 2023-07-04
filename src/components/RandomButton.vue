@@ -16,7 +16,7 @@ const handleButtonClick = () => {
     buttonStatus.value = "playing";
   } else if (buttonStatus.value === "playing") {
     props.score.value += 1;
-    // container width,height= 400px, button width = 20px , height = 5 px
+    // container width= 1000px, height= 400px, button width = 30px , height = 15 px
     props.position.value.left = Math.random() * 1000 + 0.5 * 30 + "px";
     props.position.value.top = Math.random() * 400 + 0.5 * 15 + "px";
     if (props.score.value > 4) {
