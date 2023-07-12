@@ -13,37 +13,22 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit" v-if="isActive">
-    <label>Username</label>
-    <input v-model="user.username" />
-    <label>Password</label>
-    <input v-model="user.password" type="password" />
-    <button>OK</button>
+  <form
+    @submit.prevent="handleSubmit"
+    v-if="isActive"
+    class="w-80 h-80 bg-[#adadad] flex flex-col justify-center items-center"
+  >
+    <label class="pr-32 mb-2">Username</label>
+    <input v-model="user.username" class="mb-5 w-52 h-6 px-2 rounded-xl" />
+    <label class="pr-32 mb-2">Password</label>
+    <input
+      v-model="user.password"
+      type="password"
+      class="mb-5 w-52 h-6 px-2 rounded-xl"
+    />
+    <button class="rounded-3xl mt-4">OK</button>
   </form>
   <p v-else>{{ statusText }}</p>
 </template>
 
-<style scoped>
-form {
-  width: 400px;
-  height: 400px;
-  background-color: #adadad;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-label {
-  padding-right: 32%;
-  margin-bottom: 5px;
-}
-input {
-  margin-bottom: 20px;
-  width: 200px;
-  height: 20px;
-  border-radius: 5px;
-}
-p {
-  font-size: xx-large;
-}
-</style>
+<style scoped></style>
